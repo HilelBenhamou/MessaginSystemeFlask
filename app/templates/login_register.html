@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block login_block %}
+    <form method="POST" style="display:flex; flex-direction:row;">
+        {{ login.hidden_tag() }}
+        <br><br>
+        <p style="width:190px;color:white;">{{ login.email.label }}<br>{{ login.email(size=20) }}</p>
+        <br><br>
+        <p style="width:190px;color:white;">{{ login.password.label }}<br>{{ login.password(size=20) }}</p>
+        <br><br>
+        <p style="width:60px;padding-top:8px;"><br>{{ login.submit() }}</p>
+    </form>
+{% endblock %}
+
+{% block register_form %}
+    <h2 style="color:white;">Create an Account</h2>
+    <form method="POST">
+        {{ register.hidden_tag() }}
+        <br><br>
+        <p style="color:white;">{{ register.name.label }}<br>{{ register.name(size=56) }}</p>
+        <br>
+        <p style="color:white;">{{ register.lastname.label }}<br>{{ register.lastname(size=56) }}</p>
+        <br>
+        <p style="color:white;">{{ register.email.label }}<br>{{ register.email(size=56) }}</p>
+        <br>
+        <p style="color:white;">{{ register.username.label }}<br>{{ register.username(size=56) }}</p>
+        <br>
+        <p style="color:white;">{{ register.password.label }}<br>{{ register.password(size=56) }}</p>
+        <br>
+        {{ register.submit() }}
+
+    </form>
+{% endblock %}
+
+

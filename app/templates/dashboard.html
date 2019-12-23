@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block board_block %}
+<div style="display:flex; flex-direction:row;justify-content:space-evenly;border-right:1px solid navy; padding-left:10px;">
+
+    <div style="height:600px; width:40%;padding:70px; display:flex; flex-direction:column; border-radius:10px; background-color:AliceBlue ; overflow:scroll">
+        <h2>Welcome on board {{ current_name }} ! </h2>
+        <h5>Logged in : {{ current_email }}</h5>
+        <br><br>
+        <div style="border:1px solid navy; padding:10px;margin-bottom:10px;border-radius:10px;">
+            <h1>{% block message_received_block %}{% endblock %}</h1>
+        </div>
+        <div style="border:1px solid navy; padding:10px;margin:5px; border-radius:10px;">
+            <h2>Inbox</h2>
+            {% for info in current_received|sort(attribute='creation_date', reverse = True) %}
+                <p style="border:1px solid navy;"><strong>From {{ info.sent.email }} at {{ info.creation_date }}:</strong><br><strong>Subject :</strong> {{ info.subject }} <a class="btn btn-primary" href="{{ url_for('dashboard', is_read=True, message_id=info.message_id) }}">Read</a></p>
+            {% endfor %}
+
+        </div>
+        <br>
+        <div style="border:1px solid navy; padding:10px;margin:5px;border-radius:10px;">
+            <h2>Sent Mail</h2>
+            {% for info in current_sent|sort(attribute='creation_date', reverse = True) %}
+                <p style="border:1px solid navy"><strong>To {{ info.received.email }} at {{ info.creation_date }}:</strong><br><strong>Subject :</strong> {{ info.subject }} <a class="btn btn-primary" href="{{ url_for('dashboard', is_read=True, message_id=info.message_id) }}">Read</a></p>
+            {% endfor %}
+        </div>
+        <br>
+
+    </div>
+
+
+    <div style="height:600px; width:50%; padding:10px; display:flex; flex-direction:column; border-radius:10px; background-color:AliceBlue ;">
+        <h2 style="align-self:center;">Send a message</h2>
+        <form method="POST" style="align-self:flex-start; width:200px; margin-left:20px;">
+            {{ write.hidden_tag() }}
+            <br>
+            {{ write.sender.label }}
+            <br>
+            {{ write.sender(size=56, value=current_email, readonly="readonly") }}
+            <br>
+            {{ write.receiver.label }}
+            <br>
+            {{ write.receiver(size=56) }}
+            <br>
+            {{ write.subject.label }}
+            <br>
+            {{ write.subject(size=56) }}
+            <br><br>
+            {{ write.message.label }}
+            <br>
+            {{ write.message(cols=80, rows=8) }}
+            <br><br>
+            <p>{{ write.submit() }} {{ confirm }}</p>
+        </form>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block button_block %}
+    <button class="btn btn-light" style="width:200px;padding: 0px;align-self:flex-end; margin-right:20px;">
+        <a class="btn btn-light" href="{{ url_for('logout') }}" style="width:200px;">Logout</a>
+    </button>
+{% endblock %}

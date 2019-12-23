@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MySenger</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body style="display:flex; flex-direction:column;background-image:url('static/image1.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+    <div style="display:flex; flex-direction:row;border: 1px solid black; background-color:navy;">
+        <h1 style="align-self:center;width:100%;  color:white;">MySenger</h1>
+        <div style="display:flex; flex-direction:row;">
+            {% block login_block %}{% endblock %}
+            {% block button_block %}{% endblock %}
+        </div>
+    </div>
+
+    <div style="display:flex; flex-direction:row;justify-content:space-around;">
+        <div><h2 style="color:white;">After facebook, MySenger is there</h2></div>
+        <div style="width:300px;">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            {% block register_form %}{% endblock %}
+        </div>
+    </div>
+    <div>
+        {% block board_block %}{% endblock %}
+    </div>
+
+</body>
+</html>

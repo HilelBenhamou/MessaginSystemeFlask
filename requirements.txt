@@ -1,0 +1,17 @@
+asgiref==3.2.3
+Click==7.0
+Django==3.0.1
+Faker==3.0.0
+Flask==1.1.1
+Flask-WTF==0.14.2
+itsdangerous==1.1.0
+Jinja2==2.10.3
+MarkupSafe==1.1.1
+psycopg2==2.8.4
+python-dateutil==2.8.1
+pytz==2019.3
+six==1.13.0
+sqlparse==0.3.0
+text-unidecode==1.3
+Werkzeug==0.16.0
+WTForms==2.2.1
